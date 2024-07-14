@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  myp2papp:
+    build:
+      context: BackendAPI
+      dockerfile: Dockerfile
+    ports:
+      - "9090:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://chatdatabase:5433/chatdatabase
+      SPRING_DATASOURCE_USERNAME: p2pu
+      SPRING_DATASOURCE_PASSWORD: p2p
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_JPA_SHOW_SQL: true
+    depends_on:
+      - chatdatabase
+
+  chatdatabase:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_DB: chatdatabase
+      POSTGRES_USER: p2pu
+      POSTGRES_PASSWORD: p2p
+    ports:
+      - "5433:5432"
+    volumes:
+      - chatdatabase_data:/var/lib/postgresql/data
+
+volumes:
+  chatdatabase_data:
