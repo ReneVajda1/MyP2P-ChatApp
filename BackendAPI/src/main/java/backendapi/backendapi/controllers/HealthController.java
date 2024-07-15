@@ -1,4 +1,4 @@
-package backendapi.backendapi;
+package backendapi.backendapi.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
